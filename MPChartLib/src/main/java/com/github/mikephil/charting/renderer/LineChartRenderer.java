@@ -570,6 +570,7 @@ public class LineChartRenderer extends LineRadarRenderer {
 
                 for (int j = 0; j < positions.length; j += 2) {
 
+                    boolean isLastItem = (j + 2) == positions.length;
                     float x = positions[j];
                     float y = positions[j + 1];
 
@@ -582,7 +583,13 @@ public class LineChartRenderer extends LineRadarRenderer {
                     Entry entry = dataSet.getEntryForIndex(j / 2 + mXBounds.min);
 
                     if (dataSet.isDrawValuesEnabled()) {
-                        drawValue(c, formatter.getPointLabel(entry), x, y - valOffset, dataSet.getValueTextColor(j / 2));
+                        int color = dataSet.getValueTextColor(j / 2);
+
+                        if (isLastItem) {
+                            color = dataSet.getLastValueColor();
+                            mValuePaint.setTextSize(mValuePaint.getTextSize() * 3);
+                        }
+                        drawValue(c, formatter.getPointLabel(entry), x, y - valOffset, color);
                     }
 
                     if (entry.getIcon() != null && dataSet.isDrawIconsEnabled()) {

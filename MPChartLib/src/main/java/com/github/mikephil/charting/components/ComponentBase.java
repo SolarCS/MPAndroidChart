@@ -43,6 +43,11 @@ public abstract class ComponentBase {
      */
     protected int mTextColor = Color.BLACK;
 
+    /**
+     * the text color to use for the last label
+     */
+    protected int mLastValueTextColor = Color.BLACK;
+
 
     public ComponentBase() {
 
@@ -149,6 +154,25 @@ public abstract class ComponentBase {
      */
     public int getTextColor() {
         return mTextColor;
+    }
+
+    /**
+     * Sets the last text color to use for the labels. Make sure to use
+     * getResources().getColor(...) when using a color from the resources.
+     *
+     * @param color
+     */
+    public void setLastTextColor(int color) {
+        mLastValueTextColor = color;
+    }
+
+    /**
+     * Returns the last text color that is set for the labels.
+     *
+     * @return
+     */
+    public int getLastTextColor() {
+        return mLastValueTextColor;
     }
 
     /**

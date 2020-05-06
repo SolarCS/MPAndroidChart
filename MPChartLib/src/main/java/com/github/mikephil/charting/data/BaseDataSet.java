@@ -34,6 +34,11 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
     protected List<Integer> mValueColors = null;
 
     /**
+     * Color of the last value of the DataSet
+     */
+    protected Integer mLastValueColor = null;
+
+    /**
      * label that describes the DataSet or the data the DataSet represents
      */
     private String mLabel = "DataSet";
@@ -301,6 +306,11 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
     }
 
     @Override
+    public void setLastValueTextColor(int color) {
+        mLastValueColor = color;
+    }
+
+    @Override
     public void setValueTextColors(List<Integer> colors) {
         mValueColors = colors;
     }
@@ -323,6 +333,15 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
     @Override
     public int getValueTextColor(int index) {
         return mValueColors.get(index % mValueColors.size());
+    }
+
+    @Override
+    public int getLastValueColor() {
+        if (mLastValueColor != null) {
+            return mLastValueColor;
+        } else {
+            return mValueColors.get(0);
+        }
     }
 
     @Override

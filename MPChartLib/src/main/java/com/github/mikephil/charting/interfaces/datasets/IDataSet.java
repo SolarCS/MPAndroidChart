@@ -341,6 +341,13 @@ public interface IDataSet<T extends Entry> {
     void setValueTextColor(int color);
 
     /**
+     * Sets the color the last value-labels of this DataSet should have.
+     *
+     * @param color
+     */
+    void setLastValueTextColor(int color);
+
+    /**
      * Sets a list of colors to be used as the colors for the drawn values.
      *
      * @param colors
@@ -376,6 +383,13 @@ public interface IDataSet<T extends Entry> {
      * @return
      */
     int getValueTextColor(int index);
+
+    /**
+     * Returns the color at the last index that is used for drawing the values inside the chart.
+     * Uses modulus internally.
+     * @return
+     */
+    int getLastValueColor();
 
     /**
      * Returns the typeface that is used for drawing the values inside the chart

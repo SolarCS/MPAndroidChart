@@ -113,6 +113,7 @@ public class LineChartActivity1 extends DemoBase implements OnSeekBarChangeListe
 
             // vertical grid lines
             xAxis.enableGridDashedLine(10f, 10f, 0f);
+            xAxis.setLastTextColor(Color.RED);
         }
 
         YAxis yAxis;
@@ -223,7 +224,8 @@ public class LineChartActivity1 extends DemoBase implements OnSeekBarChangeListe
             set1.setFormSize(15.f);
 
             // text size of values
-            set1.setValueTextSize(9f);
+            set1.setValueTextSize(13f);
+            set1.setLastValueTextColor(Color.RED);
 
             // draw selection line as dashed
             set1.enableDashedHighlightLine(10f, 5f, 0f);

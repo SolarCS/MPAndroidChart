@@ -31,6 +31,9 @@ public class XAxisRenderer extends AxisRenderer {
         mAxisLabelPaint.setColor(Color.BLACK);
         mAxisLabelPaint.setTextAlign(Align.CENTER);
         mAxisLabelPaint.setTextSize(Utils.convertDpToPixel(10f));
+        mAxisLastLabelPaint.setColor(Color.BLACK);
+        mAxisLastLabelPaint.setTextAlign(Align.CENTER);
+        mAxisLastLabelPaint.setTextSize(Utils.convertDpToPixel(10f));
     }
 
     protected void setupGridPaint() {
@@ -80,6 +83,9 @@ public class XAxisRenderer extends AxisRenderer {
         mAxisLabelPaint.setTypeface(mXAxis.getTypeface());
         mAxisLabelPaint.setTextSize(mXAxis.getTextSize());
 
+        mAxisLastLabelPaint.setTypeface(mXAxis.getTypeface());
+        mAxisLastLabelPaint.setTextSize(mXAxis.getTextSize());
+
         final FSize labelSize = Utils.calcTextSize(mAxisLabelPaint, longest);
 
         final float labelWidth = labelSize.width;
@@ -111,6 +117,10 @@ public class XAxisRenderer extends AxisRenderer {
         mAxisLabelPaint.setTypeface(mXAxis.getTypeface());
         mAxisLabelPaint.setTextSize(mXAxis.getTextSize());
         mAxisLabelPaint.setColor(mXAxis.getTextColor());
+
+        mAxisLastLabelPaint.setTypeface(mXAxis.getTypeface());
+        mAxisLastLabelPaint.setTextSize(mXAxis.getTextSize());
+        mAxisLastLabelPaint.setColor(mAxis.getLastTextColor());
 
         MPPointF pointF = MPPointF.getInstance(0,0);
         if (mXAxis.getPosition() == XAxisPosition.TOP) {
@@ -197,6 +207,7 @@ public class XAxisRenderer extends AxisRenderer {
 
         for (int i = 0; i < positions.length; i += 2) {
 
+            boolean isLastItem = (i + 2) == positions.length;
             float x = positions[i];
 
             if (mViewPortHandler.isInBoundsX(x)) {
@@ -221,13 +232,20 @@ public class XAxisRenderer extends AxisRenderer {
                     }
                 }
 
-                drawLabel(c, label, x, pos, anchor, labelRotationAngleDegrees);
+                if (isLastItem) {
+                    drawLabelWithPaint(c, label, x, pos, anchor, labelRotationAngleDegrees, mAxisLastLabelPaint);
+                } else {
+                    drawLabel(c, label, x, pos, anchor, labelRotationAngleDegrees);
+                }
             }
         }
     }
 
     protected void drawLabel(Canvas c, String formattedLabel, float x, float y, MPPointF anchor, float angleDegrees) {
         Utils.drawXAxisValue(c, formattedLabel, x, y, mAxisLabelPaint, anchor, angleDegrees);
+    }
+    protected void drawLabelWithPaint(Canvas c, String formattedLabel, float x, float y, MPPointF anchor, float angleDegrees, Paint paint) {
+        Utils.drawXAxisValue(c, formattedLabel, x, y, paint, anchor, angleDegrees);
     }
     protected Path mRenderGridLinesPath = new Path();
     protected float[] mRenderGridLinesBuffer = new float[2];
