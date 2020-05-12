@@ -544,6 +544,11 @@ public class LegendRenderer extends Renderer {
                 mLegendFormPaint.setStyle(Paint.Style.STROKE);
                 mLegendFormPaint.setStrokeWidth(formLineWidth);
                 mLegendFormPaint.setPathEffect(formLineDashEffect);
+                if (legend.isFormRoundedCap()) {
+                    mLegendFormPaint.setStrokeJoin(Paint.Join.ROUND);
+                    mLegendFormPaint.setStrokeCap(Paint.Cap.ROUND);
+                    mLegendFormPaint.setDither(true);
+                }
 
                 mLineFormPath.reset();
                 mLineFormPath.moveTo(x, y);

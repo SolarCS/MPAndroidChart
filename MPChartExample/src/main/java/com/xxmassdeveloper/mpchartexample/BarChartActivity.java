@@ -118,10 +118,12 @@ public class BarChartActivity extends DemoBase implements OnSeekBarChangeListene
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setDrawInside(false);
-        l.setForm(LegendForm.SQUARE);
-        l.setFormSize(9f);
-        l.setTextSize(11f);
+        l.setForm(LegendForm.LINE);
+        l.setFormSize(20f);
+        l.setTextSize(13f);
         l.setXEntrySpace(4f);
+        l.setFormLineWidth(8f);
+        l.setFormRoundedCap(true);
 
         XYMarkerView mv = new XYMarkerView(this, xAxisFormatter);
         mv.setChartView(chart); // For bounds control

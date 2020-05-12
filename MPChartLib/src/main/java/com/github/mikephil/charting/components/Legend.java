@@ -115,6 +115,12 @@ public class Legend extends ComponentBase {
      */
     private DashPathEffect mFormLineDashEffect = null;
 
+
+    /**
+     * Form should be round
+     */
+    private boolean mFormRoundedCap = false;
+
     /**
      * the space between the legend entries on a horizontal axis, default 6f
      */
@@ -480,6 +486,14 @@ public class Legend extends ComponentBase {
      */
     public DashPathEffect getFormLineDashEffect() {
         return mFormLineDashEffect;
+    }
+
+    public void setFormRoundedCap(boolean isRound) {
+        mFormRoundedCap = isRound;
+    }
+
+    public boolean isFormRoundedCap() {
+        return mFormRoundedCap;
     }
 
     /**
