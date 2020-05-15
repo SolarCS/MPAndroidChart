@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Path;
 import android.graphics.Typeface;
+import android.text.TextPaint;
+import android.text.TextUtils;
 
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
@@ -29,7 +31,7 @@ public class LegendRenderer extends Renderer {
     /**
      * paint for the legend labels
      */
-    protected Paint mLegendLabelPaint;
+    protected TextPaint mLegendLabelPaint;
 
     /**
      * paint used for the legend forms
@@ -46,7 +48,7 @@ public class LegendRenderer extends Renderer {
 
         this.mLegend = legend;
 
-        mLegendLabelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mLegendLabelPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mLegendLabelPaint.setTextSize(Utils.convertDpToPixel(9f));
         mLegendLabelPaint.setTextAlign(Align.LEFT);
 
@@ -570,6 +572,7 @@ public class LegendRenderer extends Renderer {
      * @param label the label to draw
      */
     protected void drawLabel(Canvas c, float x, float y, String label) {
-        c.drawText(label, x, y, mLegendLabelPaint);
+        CharSequence reducedLabel = TextUtils.ellipsize(label, mLegendLabelPaint, mLegend.mTextWidthMax * 0.9f, TextUtils.TruncateAt.MIDDLE);
+        c.drawText(reducedLabel.toString(), x, y, mLegendLabelPaint);
     }
 }

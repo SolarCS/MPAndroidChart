@@ -674,7 +674,11 @@ public class Legend extends ComponentBase {
         LegendEntry[] entries = mEntries;
         int entryCount = entries.length;
 
-        mTextWidthMax = getMaximumEntryWidth(labelpaint);
+        int maxFormWidth = (int) (viewPortHandler.getChartWidth() * getMaxSizePercent()
+                - getXOffset()
+                - getFormToTextSpace()
+                - getFormSize());
+        mTextWidthMax = Math.min(maxFormWidth, getMaximumEntryWidth(labelpaint));
         mTextHeightMax = getMaximumEntryHeight(labelpaint);
 
         switch (mOrientation) {
@@ -715,7 +719,12 @@ public class Legend extends ComponentBase {
                             wasStacked = false;
                         }
 
-                        width += Utils.calcTextWidth(labelpaint, label);
+                        int labelWidth = Utils.calcTextWidth(labelpaint, label);
+                        if (labelWidth > mTextWidthMax) {
+                            width = mTextWidthMax;
+                        } else {
+                            width += labelWidth;
+                        }
 
                         maxHeight += labelLineHeight + yEntrySpace;
                     } else {
